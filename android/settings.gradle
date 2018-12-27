@@ -1,0 +1,3 @@
+rootProject.name = 'ReactXPTest'
+
+include ':app'
