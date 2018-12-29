@@ -1,9 +1,9 @@
 import RX from 'reactxp';
 import {ComponentBase} from 'resub';
-import {SampleObject} from './models/SampleObject';
+import {SampleObject} from '../models/SampleObject';
 import * as React from 'react';
-import HoverButton from './controls/HoverButton';
-import {Colors, FontSizes} from './app/Styles';
+import HoverButton from '../controls/HoverButton';
+import {Colors, FontSizes} from '../app/Styles';
 
 interface AppListItemProps extends RX.CommonProps {
     sampleObject: SampleObject;

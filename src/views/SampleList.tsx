@@ -1,18 +1,18 @@
 import React from 'react';
 import RX from 'reactxp';
-import {SampleObject} from './models/SampleObject';
+import {SampleObject} from '../models/SampleObject';
 import {ComponentBase} from 'resub';
-import SampleStore from './stores/SampleStore';
+import SampleStore from '../stores/SampleStore';
 
 import {VirtualListView, VirtualListViewItemInfo} from 'reactxp-virtuallistview';
 import AppListItem from './AppListItem';
-import {Colors} from './app/Styles';
+import {Colors} from '../app/Styles';
 
 interface AppListItemInfo extends VirtualListViewItemInfo {
     sampleObject: SampleObject;
 }
 
-interface AppState {
+interface ListState {
     sampleObjects: AppListItemInfo[];
 }
 
@@ -66,9 +66,9 @@ const _styles = {
     }),
 };
 
-const _listItemHeight = 35;
+const _listItemHeight = 36;
 
-export class App extends ComponentBase<{}, AppState> {
+export class SampleList extends ComponentBase<{}, ListState> {
 
     public render() {
         return (
@@ -86,8 +86,8 @@ export class App extends ComponentBase<{}, AppState> {
     }
 
     // @ts-ignore
-    protected _buildState(props: {}, initialBuild: boolean): Partial<AppState> | undefined {
-        const partialState: Partial<AppState> = {};
+    protected _buildState(props: {}, initialBuild: boolean): Partial<ListState> | undefined {
+        const partialState: Partial<ListState> = {};
 
         partialState.sampleObjects = SampleStore.getSampleObjects().map((sampleObject, i) => {
             return {
