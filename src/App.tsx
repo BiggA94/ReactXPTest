@@ -4,7 +4,24 @@ import {SampleObject} from './models/SampleObject';
 import {ComponentBase} from 'resub';
 import SampleStore from './stores/SampleStore';
 
+import {VirtualListView, VirtualListViewItemInfo} from 'reactxp-virtuallistview';
+import AppListItem from './AppListItem';
+import {Colors} from './app/Styles';
+
+interface AppListItemInfo extends VirtualListViewItemInfo {
+    sampleObject: SampleObject;
+}
+
+interface AppState {
+    sampleObjects: AppListItemInfo[];
+}
+
 const _styles = {
+    listScroll: RX.Styles.createViewStyle({
+        flexDirection: 'column',
+        alignSelf: 'stretch',
+        backgroundColor: Colors.contentBackground,
+    }),
     main: RX.Styles.createViewStyle({
         justifyContent: 'center',
         alignItems: 'center',
@@ -42,56 +59,63 @@ const _styles = {
         paddingLeft: 5,
         color: '#0070E0',
     }),
+    container: RX.Styles.createViewStyle({
+        flex: 1,
+        alignSelf: 'stretch',
+        backgroundColor: Colors.contentBackground,
+    }),
 };
 
-const rotateValue = RX.Animated.createValue(0);
-const logoAnimationStyle = RX.Styles.createAnimatedViewStyle({
-    opacity: rotateValue,
-});
-
-const logoRotationAnimation = RX.Animated.sequence([
-    RX.Animated.timing(rotateValue,
-        {
-            toValue: 1,
-            delay: 0,
-            duration: 2000,
-            easing: RX.Animated.Easing.Linear(),
-        },
-    ),
-]);
-
-logoRotationAnimation.start();
-
-interface AppState {
-    sampleObjects?: SampleObject[];
-}
+const _listItemHeight = 35;
 
 export class App extends ComponentBase<{}, AppState> {
 
-    protected _buildState(props: {}, initialBuild: boolean): Partial<AppState> | undefined {
-        let partialState: Partial<AppState> = {
-        };
+    public render() {
+        return (
+            <RX.View useSafeInsets={true} style={_styles.container}>
+                <VirtualListView
+                    itemList={this.state.sampleObjects}
+                    renderItem={this._renderItem}
+                    style={_styles.listScroll}
+                    skipRenderIfItemUnchanged={true}
+                    padding={5}
 
-        partialState.sampleObjects = SampleStore.getSampleObjects();
+                />
+            </RX.View>
+        );
+    }
+
+    // @ts-ignore
+    protected _buildState(props: {}, initialBuild: boolean): Partial<AppState> | undefined {
+        const partialState: Partial<AppState> = {};
+
+        partialState.sampleObjects = SampleStore.getSampleObjects().map((sampleObject, i) => {
+            return {
+                key: i.toString(),
+                height: _listItemHeight,
+                template: 'sampleObject',
+                sampleObject,
+            };
+        });
 
         return partialState;
     }
 
-    public render() {
+    protected _onPressSampleObject(sample: SampleObject) {
+        if (RX.Platform.getType() === 'web') {
+            alert(JSON.stringify(sample));
+        } else {
+            console.log(JSON.stringify(sample));
+        }
+    }
+
+    private _renderItem = (item: AppListItemInfo, hasFocus?: boolean) => {
         return (
-            <RX.Animated.View style={[_styles.main, logoAnimationStyle]}>
-                <RX.View>
-                    <RX.Text style={_styles.title}>
-                        objects:
-                        <RX.Text style={_styles.name}>
-                            {this.state.sampleObjects!![0].text}
-                        </RX.Text>
-                    </RX.Text>
-                    <RX.Text style={_styles.label}>
-                        To get started, edit /src/App.tsx
-                    </RX.Text>
-                </RX.View>
-            </RX.Animated.View>
+            <AppListItem
+                sampleObject={item.sampleObject}
+                isSelected={hasFocus === true}
+                onPress={this._onPressSampleObject}
+            />
         );
     }
 }

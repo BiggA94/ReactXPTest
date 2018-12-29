@@ -1,3 +1,3 @@
 export interface SampleObject {
-    text: string
+    text: string;
 }
