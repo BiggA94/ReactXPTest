@@ -105,6 +105,7 @@ export class SampleList extends ComponentBase<{}, ListState> {
         if (RX.Platform.getType() === 'web') {
             alert(JSON.stringify(sample));
         } else {
+            // @ts-ignore
             console.log(JSON.stringify(sample));
         }
     }

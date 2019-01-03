@@ -8,6 +8,7 @@ Additional Dependencies:
 simplerestclients:          RestClient\
 resub:                      State Management\
 reactxp-virtuallistview:    Recycle List View\
+reactxp-navigation:         Stackbased Navigation for Web and Native\
  
 
 

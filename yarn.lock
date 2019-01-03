@@ -832,6 +832,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
 
+"@types/node@10.12.11":
+  version "10.12.11"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.11.tgz#715c476c99a5f6898a1ae61caf9825e43c03912e"
+  integrity sha512-3iIOhNiPGTdcUNVCv9e5G7GotfvJJe2pc9w2UgDXlUwnxSZ3RgcUocIU+xYm+rTU54jIKih998QE4dMOyMN1NQ==
+
 "@types/prop-types@*":
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
@@ -1387,7 +1392,7 @@ assert-plus@1.0.0, assert-plus@^1.0.0:
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
   integrity sha1-8S4PPF13sLHN2RRpQuTpbB5N1SU=
 
-assert@^1.1.1, assert@^1.4.1:
+assert@1.4.1, assert@^1.1.1, assert@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/assert/-/assert-1.4.1.tgz#99912d591836b5a6f5b345c0f07eefc08fc65d91"
   integrity sha1-mZEtWRg2tab1s0XA8H7vwI/GXZE=
@@ -6284,15 +6289,15 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
+lodash@4.17.11, lodash@^4.11.1, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
 lodash@^3.1.0, lodash@^3.2.0, lodash@^3.3.1, lodash@^3.5.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
   integrity sha1-W/Rejkm6QYnhfUgnid/RW9FAt7Y=
-
-lodash@^4.11.1, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
-  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
 
 log-symbols@^1.0.1:
   version "1.0.2"
@@ -8233,6 +8238,23 @@ react@16.6.3:
     prop-types "^15.6.2"
     scheduler "^0.11.2"
 
+reactxp-experimental-navigation@1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/reactxp-experimental-navigation/-/reactxp-experimental-navigation-1.0.14.tgz#65810f02d617ef1a9d1b99b0ab21803e6fb43e59"
+  integrity sha512-6Wkko3d/hD5zrr8H4yVDs/HhenvvJA8bL/1pf8IZRqrG/AQyA4Y7Aikexpfzoda0nj0bD9EoVrG1Y1TOYqaipA==
+
+reactxp-navigation@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/reactxp-navigation/-/reactxp-navigation-1.5.0.tgz#1062972f8cb57223c6e0bacb0fa0fc47ff8fe856"
+  integrity sha512-LXpaYEfYql58Ky8qIkOLBhcyg6vBrvGpnDu1teZ5FYx3FXCnrA6VpjWmRW4PVkO0OpAIgNMee1btIBOQB1Rw0Q==
+  dependencies:
+    "@types/lodash" "4.14.118"
+    "@types/node" "10.12.11"
+    assert "1.4.1"
+    lodash "4.17.11"
+    reactxp-experimental-navigation "1.0.14"
+    rebound "0.1.0"
+
 reactxp-virtuallistview@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/reactxp-virtuallistview/-/reactxp-virtuallistview-1.5.0.tgz#ad5719fea5fd06157e664fe81e280f5c9eb542d7"
@@ -8381,7 +8403,7 @@ realpath-native@^1.0.0:
   dependencies:
     util.promisify "^1.0.0"
 
-rebound@^0.1.0:
+rebound@0.1.0, rebound@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/rebound/-/rebound-0.1.0.tgz#0638c61a93666bb515a58a03e1cfb34021e88b72"
   integrity sha1-BjjGGpNma7UVpYoD4c+zQCHoi3I=
