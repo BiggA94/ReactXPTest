@@ -89,7 +89,7 @@ export class SampleList extends ComponentBase<{}, ListState> {
     protected _buildState(props: {}, initialBuild: boolean): Partial<ListState> | undefined {
         const partialState: Partial<ListState> = {};
 
-        partialState.sampleObjects = SampleStore.getSampleObjects().map((sampleObject, i) => {
+        partialState.sampleObjects = SampleStore.getAll().map((sampleObject, i) => {
             return {
                 key: i.toString(),
                 height: _listItemHeight,
@@ -102,12 +102,13 @@ export class SampleList extends ComponentBase<{}, ListState> {
     }
 
     protected _onPressSampleObject(sample: SampleObject) {
-        if (RX.Platform.getType() === 'web') {
-            alert(JSON.stringify(sample));
-        } else {
-            // @ts-ignore
-            console.log(JSON.stringify(sample));
-        }
+        SampleStore.addAll([{id:sample.id+1, text:'manual Insertion' + (sample.id+1)}]);
+        // if (RX.Platform.getType() === 'web') {
+        //     alert(JSON.stringify(sample));
+        // } else {
+        //     @ts-ignore
+            // console.log(JSON.stringify(sample));
+        // }
     }
 
     private _renderItem = (item: AppListItemInfo, hasFocus?: boolean) => {
