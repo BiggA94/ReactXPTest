@@ -22,6 +22,14 @@ const styles = {
         textAlign: 'center',
         textAlignVertical: 'center',
     }),
+    container: RX.Styles.createButtonStyle({
+        alignSelf: 'stretch',
+        borderColor: Colors.borderSeparatorLight,
+        flexDirection: 'row',
+        // alignItems: 'center',
+        justifyContent: 'flex-start',
+        backgroundColor: Colors.white,
+    }),
 };
 
 export class MainView extends ComponentBase<RX.CommonProps, RX.Stateless> {

@@ -14,6 +14,7 @@ interface AppListItemInfo extends VirtualListViewItemInfo {
 
 interface ListState {
     sampleObjects: AppListItemInfo[];
+    selectedItem?: SampleObject;
 }
 
 const _styles = {
@@ -70,16 +71,25 @@ const _listItemHeight = 36;
 
 export class SampleList extends ComponentBase<{}, ListState> {
 
+    // , renderItem: (item: AppListItemInfo, hasFocus?: boolean) => any
+    constructor(props: {}) {
+        super(props);
+        this._renderItem = this._renderItem.bind(this);
+        this._onPressSampleObject = this._onPressSampleObject.bind(this);
+    }
+
     public render() {
         return (
             <RX.View useSafeInsets={true} style={_styles.container}>
+                <RX.Text>
+                    {JSON.stringify(this.state.selectedItem)}
+                </RX.Text>
                 <VirtualListView
                     itemList={this.state.sampleObjects}
                     renderItem={this._renderItem}
                     style={_styles.listScroll}
                     skipRenderIfItemUnchanged={true}
                     padding={5}
-
                 />
             </RX.View>
         );
@@ -89,25 +99,39 @@ export class SampleList extends ComponentBase<{}, ListState> {
     protected _buildState(props: {}, initialBuild: boolean): Partial<ListState> | undefined {
         const partialState: Partial<ListState> = {};
 
-        partialState.sampleObjects = SampleStore.getAll().map((sampleObject, i) => {
+        partialState.sampleObjects = SampleStore.getAll().map((sampleObject) => {
             return {
-                key: i.toString(),
+                key: sampleObject.id.toString(),
                 height: _listItemHeight,
                 template: 'sampleObject',
                 sampleObject,
             };
         });
 
+        partialState.selectedItem = SampleStore.getSelected();
+
         return partialState;
     }
 
     protected _onPressSampleObject(sample: SampleObject) {
-        SampleStore.addAll([{id:sample.id+1, text:'manual Insertion' + (sample.id+1)}]);
+        const s: SampleObject[] = [];
+        for (let i = 0; i < 20; i++) {
+            s.push({id: sample.id + i + 1, text: 'manual Insertion' + (sample.id + i + 1)});
+        }
+
+        // select clicked item
+        SampleStore.select(sample.id);
+
+        SampleStore.addAll(s);
+
+        // SampleStore.addAll([{id: sample.id + 1, text: 'manual Insertion' + (sample.id + 1)}]);
         // if (RX.Platform.getType() === 'web') {
-        //     alert(JSON.stringify(sample));
+        //     if (this.state.selectedItem) {
+        //         alert(JSON.stringify(this.state.selectedItem));
+        //     }
         // } else {
-        //     @ts-ignore
-            // console.log(JSON.stringify(sample));
+        //     //@ts-ignore
+        //     console.log(JSON.stringify(sample));
         // }
     }
 
@@ -116,8 +140,7 @@ export class SampleList extends ComponentBase<{}, ListState> {
             <AppListItem
                 sampleObject={item.sampleObject}
                 isSelected={hasFocus === true}
-                onPress={this._onPressSampleObject}
-            />
+                onPress={this._onPressSampleObject}/>
         );
     }
 }

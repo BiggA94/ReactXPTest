@@ -23,7 +23,7 @@ const _styles = {
         justifyContent: 'flex-start',
         backgroundColor: Colors.white,
     }),
-    todoNameText: RX.Styles.createTextStyle({
+    sampleText: RX.Styles.createTextStyle({
         flex: -1,
         fontSize: FontSizes.size16,
         // font: Fonts.displayRegular,
@@ -49,8 +49,10 @@ const _styles = {
 };
 
 export default class AppListItem extends ComponentBase<AppListItemProps, {}> {
+    private renderCount = 0;
 
     public render(): JSX.Element | null {
+        this.renderCount++;
         return (
             <HoverButton onPress={this._onPress} onRenderChild={this._onRenderItem}/>
         );
@@ -73,8 +75,8 @@ export default class AppListItem extends ComponentBase<AppListItemProps, {}> {
         let nameText: JSX.Element;
 
         nameText = (
-            <RX.Text style={_styles.todoNameText} numberOfLines={1}>
-                {this.props.sampleObject.text}
+            <RX.Text style={_styles.sampleText} numberOfLines={1}>
+                {this.props.sampleObject.text} (RenderCount: {this.renderCount})
             </RX.Text>
         );
 
